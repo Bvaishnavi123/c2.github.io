@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+  </head>
+
+  <body>
+    <!--DO NOT CHANGE THIS ID's-->
+
+    <div id="container">
+      <div id="sidebar">
+        <!--add your sidebar component here-->
+      </div>
+
+      <div id="main">
+        <!--DO NOT CHANGE THIS ID's-->
+        <!--Show the clicked article in detailed format here ONLY-->
+      </div>
+    </div>
+  </body>
+</html>
+<script type="module">
+  import sidebar from "./components/sidebar.js";
+  let sidebar_div = document.getElementById("sidebar");
+  sidebar_div.innerHTML = sidebar();
+
+  let news_show = JSON.parse(localStorage.getItem("article"));
+  console.log(news_show);
+
+  news_show.map(function (el) {
+    let div = document.createElement("div");
+    div.setAttribute("id","singleNews")
+
+    let des = document.createElement("p");
+    des.textContent = el.description;
+
+    let image = document.createElement("img");
+    image.src = el.urlToImage;
+    image.setAttribute("id", "image");
+
+    let title = document.createElement("h4");
+    title.textContent = el.title;
+  
+
+    let date = document.createElement("p")
+    date.textContent=el.publishedAt
+
+    let content = document.createElement("p")
+    content.textContent = el.content;
+
+    div.append(title,date,image,content,des)
+   document.getElementById("main").append(div)
+
+  });
+</script>
